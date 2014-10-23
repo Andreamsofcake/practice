@@ -1,9 +1,12 @@
-<div class="content">
-  <h1>Caribou with Ember</h1>
-  <p>
-    Caribou works great with Ember and will pre-compile your handlebars
-    templates for you. You can also use <a href="http://emblemjs.com">
-    Emblem.js</a> for any of your templates.
-  </p>
-</div>
+<div class="navbar">
+  {{#link-to 'index' class='navbar-brand'}}Home{{/link-to}}
+  {{#link-to 'signup' class='navbar-brand'}}Signup{{/link-to}}
+{{#if session.isAuthenticated }}
+  {{#link-to 'profile' class='navbar-brand'}}{{ session.username }}{{/link-to}}
+  {{#link-to 'logout' class='navbar-brand'}}Logout{{/link-to}}
+{{else}}
+  {{#link-to 'login'class='navbar-brand'}}Login{{/link-to}}
+{{/if}}
+  </div>
+
 

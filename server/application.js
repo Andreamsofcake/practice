@@ -9,9 +9,34 @@ var compression = require('compression');
 var favicon = require('serve-favicon');
 var config = require('./config');
 
+var knexConfig = require('../knexfile.js')[config.env];
+var knex = require('knex')(knexConfig);
+var bookshelf = require('bookshelf')(knex);
+
 var app = express();
+var api = express.Router();
 var resources = express();
+
 resources.use(express.static(config.public));
+
+
+var User, Token;
+User = bookshelf.Model.extend({
+  tokens: function() {
+    return this.hasMany(Token);
+  },
+  tableName: 'users'
+});
+Token = bookshelf.Model.extend({
+  user: function() {
+    return this.belongsTo(User);
+  },
+  tableName: 'tokens'
+});
+
+var admit = require('admit-one')('bookshelf', {
+  bookshelf: { modelClass: User }
+});
 
 if (config.env === 'development') {
   resources.use(express.static(path.join(__dirname, '../app')));
@@ -31,12 +56,31 @@ app.use(methodOverride());
 
 // api routes
 var api = express.Router();
+
+api.post('/users', admit.create, function(req, res) {
+  // user representations accessible via
+  // req.auth.user & req.auth.db.user
+  res.json({ user: req.auth.user });
+});
+
+api.post('/sessions', admit.authenticate, function(req, res) {
+  // user accessible via req.auth
+  res.json({ session: req.auth.user });
+});
+
+api.use(admit.authorize);
+
+api.delete('/sessions/current', admit.invalidate, function(req, res) {
+  if (req.auth.user) { throw new Error('Session not invalidated.'); }
+  res.json({ status: 'ok' });
+});
+
 api.get('/example', function(req, res) {
   res.json({});
 });
 
 // single-page app routes
-app.use('/api/v1', api);
+app.use('/api', api);
 app.get('/*', function(req, res, next) {
   req.url = '/index.html';
   next();

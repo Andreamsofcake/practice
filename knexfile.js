@@ -1,27 +1,17 @@
+'use strict';
 // Update with your config settings.
-  var User, Token;
-  User = bookshelf.Model.extend({
-    tokens: function() {
-      return this.hasMany(Token);
-    },
-    tableName: 'users'
-  });
-  Token = bookshelf.Model.extend({
-    user: function() {
-      return this.belongsTo(User);
-    },
-    tableName: 'tokens'
-  });
 
-  var admit = require('admit-one')('bookshelf', {
-    bookshelf: { modelClass: User }
-  });
+
 module.exports = {
 
   development: {
-    client: 'sqlite3',
+    client: 'postgres',
+    debug: true,
     connection: {
-      filename: './dev.sqlite3'
+      host     : process.env.APP_DB_HOST     || '127.0.0.1',
+      user     : process.env.APP_DB_USER     || '',
+      password : process.env.APP_DB_PASSWORD || '',
+      database : process.env.APP_DB_NAME     || 'practice'
     }
   },
 
