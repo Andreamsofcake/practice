@@ -1,14 +1,14 @@
 'use strict';
 
-var SetupPractise = Ember.Application.create();
+var App = Ember.Application.create();
 
-SetupPractise.Router.reopen({
+App.Router.reopen({
   location: 'history'
 });
 
-SetupPractise.ApplicationAdapter = DS.RESTAdapter.extend({
+App.ApplicationAdapter = DS.RESTAdapter.extend({
   namespace: 'api/v1'
 });
 
-// expose SetupPractise globally
-window.SetupPractise = SetupPractise;
+// expose App globally
+window.App = App;
