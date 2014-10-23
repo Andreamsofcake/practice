@@ -1,5 +1,19 @@
 'use strict';
 
+Ember.Application.initializer({
+  name: 'authentication-test',
+  initialize: function(container, application) {
+    var Ephemeral = Ember.AdmitOne.Storage.Base.extend({
+      data: null,
+      persist: function(data) { this.set('data', data); },
+      restore: function() { return this.get('data'); },
+      clear: function() { this.set('data'); }
+    });
+    application.register('auth-session-storage:ephemeral', Ephemeral);
+    application.register('auth-session-storage:test', Ephemeral);
+    App.AdmitOneContainers.storage = 'auth-session-storage:test';
+  }
+});
 
 Ember.LOG_VERSION = false;
 Ember.testing = true;

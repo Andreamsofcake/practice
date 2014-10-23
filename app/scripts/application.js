@@ -1,7 +1,9 @@
 'use strict';
 
 var App = Ember.Application.create();
-Ember.AdmitOne.setup();
+
+App.AdmitOneContainers = {};
+Ember.AdmitOne.setup({ containers: App.AdmitOneContainers });
 
 App.Router.map(function() {
   this.route('signup');
