@@ -26,13 +26,17 @@ describe('app', function() {
     })
   });
   it.skip('adds a comment to the user profile', function() {
-      //sign in to profile  
+      //sign in to profile
       //url will be profile
         //add a comment
-        //
-        //
+      visit('/signin');
+        fillIn('input.username', 'fakeperson);
+        fillIn('input.password', 'fakepassword);
+        click('button.submit');
+      fillIn('comment', 'fakecomment');
       andThen(function(){
-      expect('the comment to be in the content of the profile').to.equal(1);
-    })
+      expect(currentURL()).to.equal('/profile');
+      expect(comment).to.equal('fakecomment');
+    }
   })
 });
