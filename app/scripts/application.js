@@ -22,8 +22,8 @@ App.ApplicationAdapter = DS.RESTAdapter.extend({
 
 App.ProfileRoute = Ember.Route.extend(Ember.AdmitOne.AuthenticatedRouteMixin, {
   model: function() {
-//    return this.store.createRecord('comment');
-    return {};
+    return this.store.createRecord('comment');
+ //   return {};
   }
 });
 
@@ -32,19 +32,19 @@ App.ProfileController = Ember.ObjectController.extend({
   actions: {
     addComment: function() {
 
-      // var self = this;
+      var self = this;
 
-      // this.set('error', undefined);
-      // this.get('model').save() // create the comment
-      // .then(function() {
-      //   // do we really want to do anything after it was saved?
-      //   // group decision.
-      // })
-      // .catch(function(error) {
-      //   if (error.responseJSON) { error = error.responseJSON; }
-      //   if (error.error) { error = error.error; }
-      //   self.set('error', error);
-      // });
+      this.set('error', undefined);
+      this.get('model').save() // create the comment
+      .then(function() {
+        // do we really want to do anything after it was saved?
+        // group decision.
+      })
+      .catch(function(error) {
+        if (error.responseJSON) { error = error.responseJSON; }
+        if (error.error) { error = error.error; }
+        self.set('error', error);
+      });
     }
   }
 });
@@ -53,7 +53,17 @@ App.ProfileController = Ember.ObjectController.extend({
 
 App.User = DS.Model.extend({
   username: DS.attr('string'),
-  password: DS.attr('string')
+  password: DS.attr('string'),
+  profile: DS.attr('comments')
+});
+//The app has a method to add comments to the user.
+//The comments are a string
+App.Profile = DS.Model.extend({
+  comments: DS.hasMany('comment')
+});
+
+App.Comment = DS.Model.extend({
+  body: DS.attr()
 });
 
 App.LoginRoute = Ember.Route.extend({
