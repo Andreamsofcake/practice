@@ -22,13 +22,16 @@ App.ApplicationAdapter = DS.RESTAdapter.extend({
 
 App.ProfileRoute = Ember.Route.extend(Ember.AdmitOne.AuthenticatedRouteMixin, {
   model: function() {
-    return this.store.createRecord('comment');
+//    return this.store.createRecord('comment');
+    return {};
   }
 });
 
+
 App.ProfileController = Ember.ObjectController.extend({
   actions: {
-    comment: function() {
+    addComment: function() {
+
       // var self = this;
 
       // this.set('error', undefined);
