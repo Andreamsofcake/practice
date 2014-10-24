@@ -57,7 +57,7 @@ App.User = DS.Model.extend({
 
 
 App.Comment = DS.Model.extend({
-  body: DS.attr()
+  body: DS.attr('string')
 });
 
 App.LoginRoute = Ember.Route.extend({

@@ -15,9 +15,9 @@ Ember.Application.initializer({
   }
 });
 
-// Ember.Test.registerHelper('applicationContainer', function(app) {
-//   return app.__container__;
-// });
+Ember.Test.registerHelper('applicationContainer', function(app) {
+  return app.__container__;
+});
 
 Ember.LOG_VERSION = false;
 Ember.testing = true;
