@@ -21,7 +21,32 @@ App.ApplicationAdapter = DS.RESTAdapter.extend({
 });
 
 App.ProfileRoute = Ember.Route.extend(Ember.AdmitOne.AuthenticatedRouteMixin, {
+  model: function() {
+    return this.store.createRecord('comment');
+  }
 });
+
+App.ProfileController = Ember.ObjectController.extend({
+  actions: {
+    comment: function() {
+      // var self = this;
+
+      // this.set('error', undefined);
+      // this.get('model').save() // create the comment
+      // .then(function() {
+      //   // do we really want to do anything after it was saved?
+      //   // group decision.
+      // })
+      // .catch(function(error) {
+      //   if (error.responseJSON) { error = error.responseJSON; }
+      //   if (error.error) { error = error.error; }
+      //   self.set('error', error);
+      // });
+    }
+  }
+});
+
+
 
 App.User = DS.Model.extend({
   username: DS.attr('string'),
@@ -98,6 +123,7 @@ App.SignupController = Ember.ObjectController.extend({
     }
   }
 });
+
 
 // expose App globally
 window.App = App;

@@ -26,18 +26,18 @@ describe('app', function() {
     })
   });
   it.skip('adds a comment to the user profile', function() {
-      //sign in to profile
-      //url will be profile
-        //add a comment
-      visit('/signin');
-        fillIn('input.username', 'fakeperson);
-        fillIn('input.password', 'fakepassword);
-        click('button.submit');
-      fillIn('comment', 'fakecomment');
-      click('button.submit');
-      andThen(function(){
+    //sign in to profile
+    //url will be profile
+    //add a comment
+    visit('/signin');
+    fillIn('input.username', 'fakeperson');
+    fillIn('input.password', 'fakepassword');
+    click('button.submit');
+    fillIn('comment', 'fakecomment');
+    click('button.submit');
+    andThen(function(){
       expect(currentURL()).to.equal('/profile');
       expect(comment).to.equal('fakecomment');
-    }
-  })
+    });
+  });
 });
