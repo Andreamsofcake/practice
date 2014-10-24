@@ -1,1 +1,5 @@
-<p>this is your profile page</p>
+<form>
+  {{input type="text" required="true" autofocus="true" placeholder="Username" value=username}}
+  <button type="submit">Comment</button>
+  {{#if error}}<div>Error: {{error}}.</div>{{/if}}
+</form>
