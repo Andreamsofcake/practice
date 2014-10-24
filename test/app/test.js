@@ -34,6 +34,7 @@ describe('app', function() {
         fillIn('input.password', 'fakepassword);
         click('button.submit');
       fillIn('comment', 'fakecomment');
+      click('button.submit');
       andThen(function(){
       expect(currentURL()).to.equal('/profile');
       expect(comment).to.equal('fakecomment');
