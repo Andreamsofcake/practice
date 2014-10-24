@@ -95,7 +95,7 @@ describe('app', function() {
       });
     });
 
-    it.skip('shows an error when the server fails to respond to commenting properly', function() {
+    it('shows an error when the server fails to respond to commenting properly', function() {
       var commentBody = 'fakecomment';
       var responseJSON = {
         error: {
@@ -110,9 +110,7 @@ describe('app', function() {
       fillIn('input.comment', commentBody);
       click('button.submit');
       andThen(function(){
-        expect('a real test to have been written here').to.eql('it wasnt');
-        // TODO: add more good expectations. for instance:
-        // The content 'Terrible error!' is somewhere on the page
+        expect(find('.error').text()).to.eql('Terrible error!');
       });
     });
 

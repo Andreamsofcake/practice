@@ -1,7 +1,7 @@
 <form>
   {{input class="comment" type="text" required="true" autofocus="true" placeholder="Comment" value=body}}
   <button class="submit" {{action 'addComment'}}>Post</button>
-  {{#if error}}<div>Error: {{error}}.</div>{{/if}}
+  {{#if error}}<div class="error">{{error.message}}</div>{{/if}}
   <br>
   {{body}}
 </form>
