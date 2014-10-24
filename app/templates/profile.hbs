@@ -1,5 +1,7 @@
 <form>
-  {{input type="text" required="true" autofocus="true" placeholder="Username" value=username}}
-  <button type="submit">Comment</button>
+  {{input type="text" required="true" autofocus="true" placeholder="Comment" value=comment}}
+  <button type="submit">Post</button>
   {{#if error}}<div>Error: {{error}}.</div>{{/if}}
+  <br>
+  {{comment}}
 </form>
