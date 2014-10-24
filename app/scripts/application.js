@@ -36,13 +36,14 @@ App.ProfileController = Ember.ObjectController.extend({
 
       this.set('error', undefined);
       this.get('model').save() // create the comment
-      // .then(function() {
-      // })
-      // .catch(function(error) {
-      //   if (error.responseJSON) { error = error.responseJSON; }
-      //   if (error.error) { error = error.error; }
-      //   self.set('error', error);
-      // });
+      .then(function() {
+        // still need to figure out if anything is going to happen here.
+      })
+      .catch(function(error) {
+        if (error.responseJSON) { error = error.responseJSON; }
+        if (error.error) { error = error.error; }
+        self.set('error', error);
+      });
     }
   }
 });
